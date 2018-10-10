@@ -80,6 +80,10 @@ BOARD_EGL_NEEDS_HANDLE_VALUE := true
 TARGET_INIT_VENDOR_LIB := libinit_kminilte
 TARGET_LIBINIT_DEFINES_FILE := $(DEVICE_PATH)/init/init_kminilte.cpp
 
+# Vendor security patch level
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.lineage.build.vendor_security_patch=2018-08-01
+
 # Recovery
 TARGET_RECOVERY_DEVICE_DIRS += $(DEVICE_PATH)
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.universal3470
