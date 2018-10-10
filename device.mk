@@ -131,6 +131,10 @@ PRODUCT_PACKAGES += \
     AriesParts \
     DockAudio
 
+# Vendor security patch level
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.lineage.build.vendor_security_patch=2018-08-01
+
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.isUsbOtgEnabled=true
 
