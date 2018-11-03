@@ -21,6 +21,9 @@ persist.radio.add_power_save=1
 
 ro.nfc.sec_hal=true
 
+# Camera
+camera2.portability.force_api=1
+
 # Vendor security patch level
 ro.lineage.build.vendor_security_patch=2017-08-01
 
