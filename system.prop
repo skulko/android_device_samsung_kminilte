@@ -18,6 +18,8 @@ persist.radio.add_power_save=1
 
 # audio
 ro.config.vc_call_vol_steps=7
+ro.config.media_vol_steps=25
+
 # Uncomment the following line to enable Bluetooth A2DP sink
 #persist.service.bt.a2dp.sink=true
 
