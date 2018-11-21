@@ -22,7 +22,7 @@ persist.radio.add_power_save=1
 ro.nfc.sec_hal=true
 
 # Vendor security patch level
-ro.lineage.build.vendor_security_patch=2018-08-01
+ro.lineage.build.vendor_security_patch=2017-08-01
 
 # this affects lock screen ColorFader and ensures release of /dev/pvrsrvkm GPU ressources
 ro.egl.destroy_after_detach=true
