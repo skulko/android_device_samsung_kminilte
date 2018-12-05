@@ -27,7 +27,6 @@ lib/libhdcp2.so
 lib/libstagefright_hdcp.so
 # Needed by libwvm.so
 vendor/lib/mediadrm/libwvdrmengine.so
-vendor/lib/liboemcrypto.so
 
 # GPS
 bin/gps.cer
@@ -44,7 +43,7 @@ lib/egl/libGLESv2_mali.so
 # Needed by libEGL_mali.so
 lib/libMali.so
 
-# See: 
+# See:
 # - https://android.googlesource.com/platform/hardware/samsung_slsi/exynos5/+/master
 # - https://www.gitorious.org/replicant/hardware_samsung
 # - https://github.com/S3AOSP/android_hardware_samsung
@@ -190,6 +189,7 @@ etc/wifi/bcmdhd_apsta.bin_b2
 etc/wifi/bcmdhd_p2p.bin_b2
 etc/wifi/bcmdhd_sta.bin_b2
 etc/wifi/nvram_net.txt
+etc/wifi/cred.conf
 
 # Audio
 lib/libaudio-ril.so
