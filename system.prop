@@ -23,6 +23,7 @@ ro.config.media_vol_steps=25
 # Uncomment the following line to enable Bluetooth A2DP sink
 #persist.service.bt.a2dp.sink=true
 
+# NFC
 ro.nfc.sec_hal=true
 
 # Camera
