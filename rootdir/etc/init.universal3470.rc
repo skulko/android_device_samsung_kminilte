@@ -8,13 +8,31 @@ on early-init
     chmod 0755 /sys/kernel/debug
 
 on init
+#    start watchdogd
+
+    # See storage config details at http://source.android.com/tech/storage/
+    mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage/emulated 0555 root root
+
+    #export EXTERNAL_STORAGE /storage/emulated/legacy
+    #export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
+    #export EMULATED_STORAGE_TARGET /storage/emulated
+
     # Support legacy paths
-    symlink /sdcard /storage/sdcard0
+    symlink /sdcard /mnt/sdcard
+
+    #export SECONDARY_STORAGE /storage/extSdCard
+    export EXTERNAL_STORAGE /sdcard
 
     mkdir /efs 0771 radio system
     symlink /dev/block/mmcblk0p13 /dev/mbin0
     restorecon /dev/mbin0
     symlink  /sys/devices/12110000.usb/ehci_power /dev/ehci_power
+
+on post-fs-data
+    # we will remap this as /mnt/sdcard with the sdcard fuse tool
+    mkdir /data/media 0770 media_rw media_rw
+    chown media_rw media_rw /data/media
 
  # permission for CHARGING
    chown system radio /sys/class/power_supply/battery/batt_reset_soc
@@ -64,10 +82,47 @@ on post-fs-data
 # Multimedia property for Smart View
 	setprop media.enable-commonsource true
 
-#nfc
+   # NFC_NXP
     setprop ro.nfc.port "I2C"
     mkdir /data/nfc 0700 nfc nfc
     mkdir /data/nfc/param 0700 nfc nfc
+    chmod 0660 /dev/pn547
+    chown nfc nfc /dev/pn547
+    chown nfc /dev/pn547
+    chgrp nfc /dev/pn547
+
+     # NFC_SLSI
+    chmod 0660 /dev/sec-nfc
+    chown nfc nfc /dev/sec-nfc
+
+
+    # MST/NFC Switch
+    chown spay system /dev/mst_ctrl
+    chmod 0660 /dev/mst_ctrl
+
+   # h2k
+    mkdir /efs/cpk 0771 radio system
+    chmod 0644 /efs/redata.bin
+    chmod 0644 /efs/cpk/redata.bin
+    chown radio radio /efs/h2k.dat
+    chown radio radio /efs/cpk/h2k.dat
+    chmod 0644 /efs/h2k.dat
+    chmod 0644 /efs/cpk/h2k.dat
+    chown system system /efs/drm/h2k
+
+    # icd
+    check_icd
+    chown system system /dev/icd
+    chmod 0644 /dev/icd
+    chown system system /dev/icdr
+    chmod 0644 /dev/icdr
+    chown system system /dev/tzic
+    restorecon /dev/icd
+    restorecon /dev/icdr
+
+    #SideSync
+    chown system system /dev/android_ssusbcon
+    chmod 0660 /dev/android_ssusbcon
 
 #Private Mode
     mkdir /mnt/shell/privatemode 0700 system system
@@ -263,6 +318,7 @@ on boot
 
 on fs
     mount_all /fstab.universal3470
+    setprop ro.crypto.fuse_sdcard true
 
 #For Absolute Persistence Partition
     mkdir /persdata 0755 system system
@@ -492,7 +548,7 @@ on property:sys.mobicoredaemon.enable=true
     start scranton_RD
 
 # MobiCore startup
-service mobicore /system/bin/mcDriverDaemon -r /system/app/FFFFFFFF000000000000000000000001.drbin -r /system/app/mcRegistry/ffffffffd0000000000000000000000a.tlbin
+service mobicore /system/bin/mcDriverDaemon -r /system/app/FFFFFFFF000000000000000000000001.drbin -r /system/app/mcRegistry/ffffffffd0000000000000000000000a.tlbin -r /system/app/mcRegistry/ffffffffd00000000000000000000016.tlbin
     class core
     user system
     group system
@@ -505,7 +561,7 @@ service mobicore /system/bin/mcDriverDaemon -r /system/app/FFFFFFFF0000000000000
 service gpsd /system/bin/gpsd -c /system/etc/gps.xml
     class main
     user gps
-    group system wakelock inet net_raw
+    group system inet net_raw
     ioprio be 0
 #    seclabel u:r:gpsd:s0
 
@@ -581,7 +637,7 @@ service charger /charger
     seclabel u:r:charger:s0
 
 # SSWAP
-service swapon /sbin/sswap -s -f 1024
+service swapon /sbin/sswap -s
     class core
     user root
     group root
