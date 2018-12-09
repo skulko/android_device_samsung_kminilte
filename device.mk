@@ -143,8 +143,5 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     SamsungDoze
 
-# Dalvik VM specific for devices with 2048 MB of RAM (G800F has 1.5G, but 2G config seems to fit)
-$(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
-
 # Inherit from smdk3470-common
 $(call inherit-product, device/samsung/smdk3470-common/smdk3470-common.mk)
