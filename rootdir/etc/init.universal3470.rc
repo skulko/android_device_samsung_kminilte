@@ -71,10 +71,6 @@ on post-fs-data
 on post-fs-data
     setprop vold.post_fs_data_done 1
 
-    # Add sockets for WiFi operation
-    mkdir /data/misc/wifi 0770 wifi wifi
-    mkdir /data/misc/wifi/sockets 0770 wifi wifi
-
     # Added for TZ Playready DRM Support
 	mkdir /efs/drm 0774 drm system
 	mkdir /efs/drm/playready 0775 drm system
