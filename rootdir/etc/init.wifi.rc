@@ -63,7 +63,7 @@ service wlandutservice /system/bin/wlandutservice
     disabled
     oneshot
 
-service macloader /system/bin/macloader
+service macloader /vendor/bin/macloader
     class main
 #    seclabel u:r:macloader:s0
     oneshot
