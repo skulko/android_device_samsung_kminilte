@@ -155,7 +155,7 @@
     <bool name="config_automatic_brightness_available">true</bool>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
-    <integer name="config_screenBrightnessDim">10</integer>
+    <integer name="config_screenBrightnessDim">2</integer>
 
     <!-- Screen brightness when dozing. -->
     <integer name="config_screenBrightnessDoze">17</integer>
@@ -170,7 +170,7 @@
     <!-- Minimum screen brightness setting allowed by the power manager.
          The user is forbidden from setting the brightness below this level. -->
     <!-- T235: screen is black at brightness=0 -->
-    <integer name="config_screenBrightnessSettingMinimum">0</integer>
+    <integer name="config_screenBrightnessSettingMinimum">2</integer>
 
     <!-- Maximum screen brightness allowed by the power manager.
          The user is forbidden from setting the brightness above this level. -->
