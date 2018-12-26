@@ -96,6 +96,9 @@ ifeq ($(HOST_OS),linux)
   endif
 endif
 
+# Shipping API level (for CTS backward compatibility)
+PRODUCT_SHIPPING_API_LEVEL := 19
+
 # TWRP (not compatible with user build variant)
 #RECOVERY_VARIANT := twrp
 DEVICE_RESOLUTION := 720x1280
