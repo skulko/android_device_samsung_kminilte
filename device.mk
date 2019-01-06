@@ -39,6 +39,20 @@ PRODUCT_PACKAGES += \
     init.wifi.rc \
     ueventd.universal3470.rc
 
+# Mapsapi
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/microg/com.google.android.maps/com.google.android.maps.xml:system/etc/permissions/com.google.android.maps.xml \
+    $(LOCAL_PATH)/microg/com.google.android.maps/com.google.android.maps.jar:system/framework/com.google.android.maps.jar
+
+# microg
+PRODUCT_PACKAGES += \
+   FakeStore \
+   GmsCore \
+   GsfProxy \
+   IchnaeaNlpBackend \
+   NominatimNlpBackend \
+   UnifiedNlp
+
 # Audio
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf
