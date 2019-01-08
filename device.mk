@@ -44,14 +44,13 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/microg/com.google.android.maps/com.google.android.maps.xml:system/etc/permissions/com.google.android.maps.xml \
     $(LOCAL_PATH)/microg/com.google.android.maps/com.google.android.maps.jar:system/framework/com.google.android.maps.jar
 
-# microg
+# MicroG
 PRODUCT_PACKAGES += \
    FakeStore \
    GmsCore \
    GsfProxy \
-   IchnaeaNlpBackend \
+   MozillaNlpBackend \
    NominatimNlpBackend \
-   UnifiedNlp
 
 # Audio
 PRODUCT_COPY_FILES += \
