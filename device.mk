@@ -51,6 +51,8 @@ PRODUCT_PACKAGES += \
    GsfProxy \
    MozillaNlpBackend \
    NominatimNlpBackend \
+   OpenWeatherMapWeatherProvider \
+
 # Swypelib
 PRODUCT_COPY_FILES += \
    $(LOCAL_PATH)/microg/swypelibs/lib/libjni_latinimegoogle.so:/system/lib/libjni_latinimegoogle.so
