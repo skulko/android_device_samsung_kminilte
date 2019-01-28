@@ -35,8 +35,6 @@ ro.lineage.build.vendor_security_patch=2017-08-01
 # this affects lock screen ColorFader and ensures release of /dev/pvrsrvkm GPU ressources
 ro.egl.destroy_after_detach=true
 
-# Tethering
-net.tethering.noprovisioning=true
 
 # Added from stock
 
