@@ -35,6 +35,17 @@ ro.lineage.build.vendor_security_patch=2017-08-01
 # this affects lock screen ColorFader and ensures release of /dev/pvrsrvkm GPU ressources
 ro.egl.destroy_after_detach=true
 
+#adb
+ro.adb.secure=0
+ro.secure=0
+ro.debuggable=1
+sys.usb.config=adb
+persist.sys.adb.shell=/system/xbin/bash
+persist.sys.usb.config=adb
+persist.service.adb.enable=1
+persist.service.debuggable=1
+sys.usb.ffs.aio_compat=1
+lineage.service.adb.root=1
 
 # Added from stock
 
