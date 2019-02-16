@@ -512,8 +512,8 @@ on fs
     chown system system /sys/class/android_usb/android0/terminal_version
 
 # Fingerprint
-    mkdir /dev/validity 0770 system system
-    mkdir /data/validity 0770 system system
+    mkdir /dev/validity 0775 system system
+    mkdir /data/validity 0775 system system
 
 # OTG power mode
     chmod 0660 /sys/class/sec/switch/otg_cable_type
