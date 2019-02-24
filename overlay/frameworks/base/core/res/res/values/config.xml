@@ -270,6 +270,7 @@
         <item>"/system/framework/boot-core-libart.vdex"</item>
         <item>"/system/priv-app/SystemUI/SystemUI.apk"</item>
         <item>"/system/priv-app/Dialer/Dialer.apk"</item>
+        <item>"/system/lib/libsurfaceflinger.so"</item>
     </string-array>
 
    <!-- Should the pinner service pin the Home application? -->
