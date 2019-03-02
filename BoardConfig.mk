@@ -48,8 +48,7 @@ TARGET_KERNEL_CONFIG := kminilte_00_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/kminilte
 
 JAVA_SOURCE_OVERLAYS := \
-    org.lineageos.hardware|hardware/samsung/lineagehw|**/*.java \
-    org.lineageos.hardware|device/samsung/kminilte/lineagehw|**/*.java
+    org.lineageos.hardware|hardware/samsung/lineagehw|**/*.java
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
