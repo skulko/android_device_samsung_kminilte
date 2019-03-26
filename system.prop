@@ -35,6 +35,10 @@ ro.lineage.build.vendor_security_patch=2017-08-01
 # this affects lock screen ColorFader and ensures release of /dev/pvrsrvkm GPU ressources
 ro.egl.destroy_after_detach=true
 
+# Memory optimizations
+ro.vendor.qti.am.reschedule_service=true
+ro.vendor.qti.sys.fw.bservice_enable=true
+
 #adb
 ro.adb.secure=0
 ro.secure=0
