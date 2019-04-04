@@ -18,8 +18,6 @@ on init
     #export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     #export EMULATED_STORAGE_TARGET /storage/emulated
 
-    write /proc/sys/vm/page-cluster 0
-
     #export SECONDARY_STORAGE /storage/extSdCard
     export EXTERNAL_STORAGE /sdcard
 
@@ -311,7 +309,6 @@ on boot
 
 on fs
     mount_all /fstab.universal3470
-    swapon_all /fstab.universal3470
     setprop ro.crypto.fuse_sdcard true
 
 #For Absolute Persistence Partition
