@@ -630,7 +630,7 @@ service charger /charger
     seclabel u:r:charger:s0
 
 # SSWAP
-service swapon /sbin/sswap -s -f 1024
+service sswap /sbin/sswap -s -f 1024
     class core
     user root
     group root
