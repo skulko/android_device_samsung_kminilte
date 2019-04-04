@@ -631,10 +631,12 @@ service charger /charger
     seclabel u:r:charger:s0
 
 # SSWAP
-service swapon /sbin/sswap -s
+service swapon /vendor/bin/sswap -s -f 1024
     class core
     user root
     group root
 #    seclabel u:r:sswap:s0
     oneshot
 
+on property:sys.boot_completed=1
+    start sswap
