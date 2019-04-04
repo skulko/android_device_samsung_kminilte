@@ -110,6 +110,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/sbin/cbd:root/sbin/cbd
 
+# SSWAP
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/sbin/sswap:root/sbin/sswap
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.consumerir.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.consumerir.xml \
