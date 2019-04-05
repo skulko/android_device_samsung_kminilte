@@ -232,6 +232,8 @@ on boot
     # enable call recording
     chmod 0660 /dev/snd/pcmC0D0c
 
+# SSWAP
+    write /proc/sys/vm/swappiness 130
 
 # OTG_TEST
     chown system radio /sys/class/host_notify/usb_otg/booster
