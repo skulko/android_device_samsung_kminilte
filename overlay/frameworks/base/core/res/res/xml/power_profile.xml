@@ -31,7 +31,7 @@
         <value>500000</value>
         <value>400000</value>
     </array>
-    <item name="cpu.idle">2.7</item>
+    <item name="cpu.suspend">2.7</item>
     <item name="wakeup.power">0.15</item>
     <array name="cpu.core_power.cluster0">
         <value>134</value>
