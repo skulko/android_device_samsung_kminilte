@@ -99,7 +99,7 @@
          don't support RIL_REQUEST_GET_RADIO_CAPABILITY
          format is UMTS|LTE|... -->
     <string translatable="false" name="config_radio_access_family">LTE | GSM | WCDMA</string>
-
+    
     <!-- Boolean to enable STK functionality on Samsung phones -->
     <!--bool name="config_samsung_stk">true</bool-->
 
@@ -172,10 +172,7 @@
 
     <!-- Dream of notifications -->
     <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
-
-    <!-- If true, the doze component is not started until after the screen has been
-         turned off and the screen off animation has been performed. -->
-    <bool name="config_dozeAfterScreenOffByDefault">true</bool>
+    <bool name="config_dozeAfterScreenOff">true</bool>
 
     <!-- Minimum screen brightness setting allowed by the power manager.
          The user is forbidden from setting the brightness below this level. -->
@@ -260,7 +257,7 @@
         <item>0</item>  <!-- 5000-10000 -->
         <item>0</item>  <!-- 10000-30000 -->
         <item>0</item>  <!-- 30000+ -->
-    </integer-array>
+    </integer-array>    
 
     <!-- Support in Surfaceflinger for blur layers. -->
     <!--bool name="config_uiBlurEnabled">true</bool-->
