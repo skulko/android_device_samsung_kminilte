@@ -18,8 +18,6 @@ on init
     #export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     #export EMULATED_STORAGE_TARGET /storage/emulated
 
-    write /proc/sys/vm/page-cluster 0
-
     #export SECONDARY_STORAGE /storage/extSdCard
     export EXTERNAL_STORAGE /sdcard
 
