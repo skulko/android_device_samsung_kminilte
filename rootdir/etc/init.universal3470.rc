@@ -636,3 +636,5 @@ service sswap /sbin/sswap -s -f 1024
     group root
     oneshot
 
+on property:sys.boot_completed=1
+    start sswap
