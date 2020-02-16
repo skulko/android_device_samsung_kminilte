@@ -51,7 +51,7 @@ PRODUCT_PACKAGES += \
    GsfProxy \
    MozillaNlpBackend \
    NominatimNlpBackend \
-   OpenWeatherMapWeatherProvider \
+   OpenWeatherMapWeatherProvider
 
 # Swypelib
 PRODUCT_COPY_FILES += \
