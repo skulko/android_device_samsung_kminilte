@@ -49,8 +49,7 @@ PRODUCT_PACKAGES += \
    FakeStore \
    GmsCore \
    GsfProxy \
-   NominatimNlpBackend \
-   OpenWeatherMapWeatherProvider
+   NominatimNlpBackend
 
 # Swypelib
 PRODUCT_COPY_FILES += \
