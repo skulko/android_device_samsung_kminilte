@@ -49,7 +49,6 @@ PRODUCT_PACKAGES += \
    FakeStore \
    GmsCore \
    GsfProxy \
-   MozillaNlpBackend \
    NominatimNlpBackend \
    OpenWeatherMapWeatherProvider
 
