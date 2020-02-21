@@ -46,6 +46,7 @@ PRODUCT_COPY_FILES += \
 
 # MicroG
 PRODUCT_PACKAGES += \
+   DejaVu \
    FakeStore \
    GmsCore \
    GsfProxy \
