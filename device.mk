@@ -46,6 +46,7 @@ PRODUCT_COPY_FILES += \
 
 # MicroG
 PRODUCT_PACKAGES += \
+   AuroraServices \
    DejaVu \
    FakeStore \
    GmsCore \
