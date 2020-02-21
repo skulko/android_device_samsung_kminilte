@@ -49,7 +49,8 @@ PRODUCT_PACKAGES += \
    FakeStore \
    GmsCore \
    GsfProxy \
-   NominatimNlpBackend
+   NominatimNlpBackend \
+   SimpleKeyboard
 
 # Swypelib
 PRODUCT_COPY_FILES += \
