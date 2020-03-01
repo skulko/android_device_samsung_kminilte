@@ -1,3 +1,5 @@
+LOCAL_PATH := $(call my-dir)
+
 include $(CLEAR_VARS)
 LOCAL_MODULE := permissions_com.aurora.services.xml
 LOCAL_MODULE_TAGS := optional
@@ -15,4 +17,4 @@ LOCAL_PRIVILEGED_MODULE := true
 LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
 LOCAL_CERTIFICATE := PRESIGNED
 LOCAL_REQUIRED_MODULES := permissions_com.aurora.services.xml
-include $(BUILD_PREBUILT
+include $(BUILD_PREBUILT)
