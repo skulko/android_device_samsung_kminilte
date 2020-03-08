@@ -26,6 +26,10 @@ on init
     restorecon /dev/mbin0
     symlink  /sys/devices/12110000.usb/ehci_power /dev/ehci_power
 
+on post-fs
+    # increase max readahead to 256 kb
+    write /sys/block/mmcblk0/queue/read_ahead_kb 256
+
 on post-fs-data
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
     mkdir /data/media 0770 media_rw media_rw
