@@ -279,6 +279,7 @@
     <string-array translatable="false" name="config_gpsParameters">
         <item>XTRA_SERVER_1=http://gllto1.glpals.com/4day/v3/latest/lto2.dat</item>
         <item>XTRA_SERVER_2=http://gllto2.glpals.com/4day/v3/latest/lto2.dat</item>
+        <item>NTP_SERVER=time.cloudflare.com</item>
     </string-array>
 
 <!-- Default list of files pinned by the Pinner Service -->
