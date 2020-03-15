@@ -82,8 +82,8 @@
 /dev/umts_router          0660   system     system
 
 #sensor
-/dev/sec-nfc                  0660   system     nfc
-/dev/iio:device*		  0660	 system     system
+/dev/sec-nfc              0660   nfc        nfc
+/dev/iio:device*          0660	 system     system
 /sys/devices/platform/s3c2440-i2c.7/i2c-7/7-0068/iio:device* buffer								0731   system     radio
 /sys/devices/platform/s3c2440-i2c.7/i2c-7/7-0068/iio:device* scan_elements						0731   system     radio
 /sys/devices/platform/s3c2440-i2c.7/i2c-7/7-0068/iio:device* trigger							0731   system     radio
