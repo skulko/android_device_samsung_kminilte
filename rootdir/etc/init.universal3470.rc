@@ -513,8 +513,8 @@ on fs
     chown system system /sys/class/android_usb/android0/terminal_version
 
 # Fingerprint
-    mkdir /dev/validity 0775 system system
-    mkdir /data/validity 0775 system system
+    mkdir /dev/validity 0770 system system
+    mkdir /data/validity 0770 system system
 
 # OTG power mode
     chmod 0660 /sys/class/sec/switch/otg_cable_type
@@ -522,9 +522,14 @@ on fs
 
 # SENSOR FRAMEWORK : starts fingerprintService
 service vcsFPService /system/bin/vcsFPService
-    class late_start
+    class main
     user system
     group system
+
+service fingerprintd /system/bin/fingerprintd
+    class main
+    user system
+    group input
 
 service prepare_param /system/bin/prepare_param.sh /dev/block/platform/dw_mmc.0/by-name/PARAM
     class core
