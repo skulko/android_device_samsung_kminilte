@@ -169,13 +169,13 @@ on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor interactive
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 20000
-    write /sys/devices/system/cpu/cpufreq/interactive/timer_slack 200000
-    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 39000
-    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 900000
+    write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 15000
+    write /sys/devices/system/cpu/cpufreq/interactive/timer_slack 150000
+    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 15000
+    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 200000
     write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 99
     write /sys/devices/system/cpu/cpufreq/interactive/target_loads "80 900000:93 1300000:98"
-    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "39000 1300000:79000"
+    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "19000 400000:39000"
     write /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration 100000
     write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 1
 
