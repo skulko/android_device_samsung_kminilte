@@ -117,18 +117,18 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/permissions/privapp-permissions-kminilte.xml:system/etc/permissions/privapp-permissions-kminilte.xml
 
 # NFC
-#PRODUCT_PACKAGES += \
-  #  com.android.nfc_extras \
-  #  NfcNci \
-  #  libnfc-nci \
-  #  Tag \
-   # android.hardware.nfc@1.0-impl
+PRODUCT_PACKAGES += \
+    com.android.nfc_extras \
+    NfcNci \
+    libnfc-nci \
+    Tag \
+    android.hardware.nfc@1.0-impl
 
-#PRODUCT_COPY_FILES += \
-	#$(LOCAL_PATH)/nfc/nfcee_access.xml:system/etc/nfcee_access.xml \
-	#$(LOCAL_PATH)/nfc/libnfc-sec-hal.conf:system/etc/libnfc-sec-hal.conf \
-	#$(LOCAL_PATH)/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf \
-	#$(LOCAL_PATH)/nfc/libnfc-sec.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-sec.conf
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/nfc/nfcee_access.xml:system/etc/nfcee_access.xml \
+	$(LOCAL_PATH)/nfc/libnfc-sec-hal.conf:system/etc/libnfc-sec-hal.conf \
+	$(LOCAL_PATH)/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf \
+	$(LOCAL_PATH)/nfc/libnfc-sec.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-sec.conf
 
 # Radio
 PRODUCT_COPY_FILES += \
