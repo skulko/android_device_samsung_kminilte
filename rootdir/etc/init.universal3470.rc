@@ -526,11 +526,6 @@ service vcsFPService /system/bin/vcsFPService
     user system
     group system
 
-service fingerprintd /system/bin/fingerprintd
-    class main
-    user system
-    group input
-
 service prepare_param /system/bin/prepare_param.sh /dev/block/platform/dw_mmc.0/by-name/PARAM
     class core
     user root

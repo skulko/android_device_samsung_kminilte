@@ -17,7 +17,7 @@
  */
 
 #define LOG_TAG "FingerprintHal_msm8974"
-#define LOG_NDEBUG 1
+#define LOG_NDEBUG 0
 
 #include <errno.h>
 #include <endian.h>
@@ -325,6 +325,8 @@ static int fingerprint_cancel(struct fingerprint_device *device) {
     uint8_t command[1] = {CALL_CANCEL};
     ret = sendcommand(vdev, command, 1);
     pthread_mutex_unlock(&vdev->lock);
+
+    send_error_notice(vdev, FINGERPRINT_ERROR_CANCELED);
 
     return ret;
 }
