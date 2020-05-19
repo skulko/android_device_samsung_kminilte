@@ -74,3 +74,7 @@ wifi.supplicant_scan_interval=180
 
 # Disable HW overlays
 debug.sf.disable_hwcomposer=true
+
+# Legacy graphics optimizations
+debug.hwui.use_buffer_age=false \
+debug.sf.enable_gl_backpressure=1 \
