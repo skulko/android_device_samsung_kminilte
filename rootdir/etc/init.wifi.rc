@@ -1,7 +1,7 @@
 on post-fs-data
     # give system access to wpa_supplicant.conf for backup and restore
-    mkdir /data/vendor/wifi 0770 wifi wifi
-    mkdir /data/vendor/wifi/wpa 0770 wifi wifi
+    mkdir /data/vendor/wifi 0771 wifi wifi
+    mkdir /data/vendor/wifi/wpa 0771 wifi wifi
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
 
     # for WIFI TRP/TIS
@@ -19,9 +19,9 @@ on post-fs-data
     chmod 0664 /data/.frameburst.info
     chmod 0664 /data/.txbf.info
     # for WIFI MAC address
-    mkdir /efs/wifi 0775 radio system
-    chown system wifi /efs/wifi/.mac.info
-    chmod 0660 /efs/wifi/.mac.info
+    mkdir /efs/wifi 0775 system system
+    chown system system /efs/wifi/.mac.info
+    chmod 0664 /efs/wifi/.mac.info
 
      # Wifi firmware reload path
     chown wifi wifi /sys/module/dhd/parameters/firmware_path
