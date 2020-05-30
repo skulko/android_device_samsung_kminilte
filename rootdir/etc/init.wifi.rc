@@ -21,7 +21,7 @@ on post-fs-data
 
     # for WIFI MAC address
     mkdir /efs/wifi 0775 system system
-    chown system wifi /efs/wifi/.mac.info
+    chown system system /efs/wifi/.mac.info
     chmod 0664 /efs/wifi/.mac.info
 
      # Wifi firmware reload path
