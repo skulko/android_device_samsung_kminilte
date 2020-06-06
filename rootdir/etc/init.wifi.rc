@@ -19,7 +19,7 @@ on post-fs-data
     chmod 0664 /data/.frameburst.info
     chmod 0664 /data/.txbf.info
     # for WIFI MAC address
-    mkdir /efs/wifi 0775 system system
+    mkdir /efs/wifi 0775 radio system
     chown system system /efs/wifi/.mac.info
     chmod 0664 /efs/wifi/.mac.info
 
@@ -27,7 +27,7 @@ on post-fs-data
     chown wifi wifi /sys/module/dhd/parameters/firmware_path
 
 on boot
-	setprop wifi.interface wlan0
+    setprop wifi.interface wlan0
 
 # Run deferred initcalls of builtin kernel modules (bcmdhd)
 service wifiloader /system/bin/wifiloader
@@ -43,43 +43,21 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     class main
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
-    group system wakelock
-    oneshot
-
-# start for WiFi MFG (TestMode)
-service mfgloader /system/bin/mfgloader
-    class main
-    disabled
-    oneshot
-
-service wlandutservice /system/bin/wlandutservice
-    class main
-    user system
-    group wifi net_raw net_admin system inet
-    disabled
+#    group system wakelock
     oneshot
 
 service macloader /vendor/bin/macloader
-    class main
+    class late_start
 #    seclabel u:r:macloader:s0
+    user system
+    group system wifi
     oneshot
 
-on property:init.svc.macloader=stopped
-    chown system root /data/.cid.info
-    chmod 0664 /data/.cid.info
-    chown system root /data/.rev
-    chmod 0664 /data/.rev
+#on property:init.svc.macloader=stopped
+#    chown system root /data/.cid.info
+#    chmod 0664 /data/.cid.info
+#    chown system root /data/.rev
+#    chmod 0664 /data/.rev
 
-# end of WiFi MFG (TestMode)
-
-service olsrd /system/bin/olsrd -f /etc/wifi/olsrd.conf
-    class main
-    disabled
-    oneshot
-
-on property:init.svc.dhcpcd_ibss=running
-    start olsrd
-
-on property:init.svc.dhcpcd_ibss=stopped
-    stop olsrd
-
+on property:wlan.driver.status=ok
+    start macloader
