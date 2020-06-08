@@ -78,3 +78,4 @@ debug.sf.disable_hwcomposer=true
 # Legacy graphics optimizations
 debug.hwui.use_buffer_age=false
 debug.sf.enable_gl_backpressure=1
+debug.stagefright.ccodec=0
