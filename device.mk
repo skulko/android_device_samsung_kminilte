@@ -136,6 +136,10 @@ PRODUCT_PACKAGES += \
     AriesParts \
     DockAudio
 
+# Camera
+PRODUCT_PACKAGES += \
+	SimpleCamera
+
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.isUsbOtgEnabled=true
 
