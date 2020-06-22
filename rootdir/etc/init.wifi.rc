@@ -11,7 +11,7 @@ on post-fs-data
     # for WIFI Version
     write /data/.wifiver.info 0
     chown system root /data/.wifiver.info
-    chmod 0664 /data/.wifiver.info
+    chmod 0666 /data/.wifiver.info
 
     # for WIFI Cert
     chmod 0664 /data/.bustxglom.info
@@ -20,9 +20,9 @@ on post-fs-data
     chmod 0664 /data/.txbf.info
 
     # for WIFI MAC address
-    mkdir /efs/wifi 0775 radio system
+    mkdir /efs/wifi 0775 system system
     chown system wifi /efs/wifi/.mac.info
-    chmod 0660 /efs/wifi/.mac.info
+    chmod 0664 /efs/wifi/.mac.info
 
      # Wifi firmware reload path
     chown wifi wifi /sys/module/dhd/parameters/firmware_path
