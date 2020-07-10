@@ -3,6 +3,7 @@ on post-fs-data
     mkdir /data/vendor/wifi 0771 wifi wifi
     mkdir /data/vendor/wifi/wpa 0771 wifi wifi
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
+    mkdir /data/vendor/wpa_supplicant 0770 wifi wifi
 
     # for WIFI TRP/TIS
     chown system root /data/.psm.info
@@ -21,7 +22,7 @@ on post-fs-data
 
     # for WIFI MAC address
     mkdir /efs/wifi 0775 system system
-    chown system wifi /efs/wifi/.mac.info
+    chown system system /efs/wifi/.mac.info
     chmod 0664 /efs/wifi/.mac.info
 
      # Wifi firmware reload path
