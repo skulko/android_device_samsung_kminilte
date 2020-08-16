@@ -23,8 +23,8 @@ on post-fs-data
     chmod 0664 /data/.txbf.info
 
     # for WIFI MAC address
-    mkdir /efs/wifi 0775 system system
-    chown system system /efs/wifi/.mac.info
+    mkdir /efs/wifi 0775 radio system
+    chown system wifi /efs/wifi/.mac.info
     chmod 0664 /efs/wifi/.mac.info
     restorecon /efs/wifi/.mac.info
 
