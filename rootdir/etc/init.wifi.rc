@@ -3,7 +3,8 @@ on post-fs-data
     mkdir /data/vendor/wifi 0771 wifi wifi
     mkdir /data/vendor/wifi/wpa 0771 wifi wifi
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
-    mkdir /data/vendor/wpa_supplicant 0770 wifi wifi
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+    chown dhcp dhcp /data/misc/dhcp
 
     # for WIFI TRP/TIS
     chown system root /data/.psm.info
@@ -13,6 +14,7 @@ on post-fs-data
     write /data/.wifiver.info 0
     chown system root /data/.wifiver.info
     chmod 0666 /data/.wifiver.info
+    restorecon /data/.wifiver.info
 
     # for WIFI Cert
     chmod 0664 /data/.bustxglom.info
@@ -24,6 +26,7 @@ on post-fs-data
     mkdir /efs/wifi 0775 system system
     chown system system /efs/wifi/.mac.info
     chmod 0664 /efs/wifi/.mac.info
+    restorecon /efs/wifi/.mac.info
 
      # Wifi firmware reload path
     chown wifi wifi /sys/module/dhd/parameters/firmware_path
