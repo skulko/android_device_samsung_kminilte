@@ -144,16 +144,20 @@ on post-fs-data
     chown system radio /sys/class/camera/front/front_camfw
     chown system radio /sys/class/camera/front/front_camtype
 
+    # Create directories for audio
+    mkdir /data/snd 0771 audioserver audio
+    chown audioserver audio /data/snd
+    mkdir /data/misc/audio 0770 audio audio
+
     # mobicore
     mkdir /data/app/mcRegistry 0775 system system
     mkdir /data/app/mcRegistry/TbStorage 0700 system system
     mkdir /efs/TEE  0770 radio system
 
-    # Symlink directories to access telephony.db and preferred-apn.xml required by libsec-ril
-    symlink /data/user_de/0/com.android.providers.telephony/databases /data/data/com.android.providers.telephony/databases
-    symlink /data/user_de/0/com.android.providers.telephony/shared_prefs /data/data/com.android.providers.telephony/shared_prefs
-    restorecon /data/data/com.android.providers.telephony/databases
-    restorecon /data/data/com.android.providers.telephony/shared_prefs
+    # Remove symlinks to avoid issues with migrate after nandroid restores
+    # Will be recreated at end of boot
+    rm /data/data/com.android.providers.telephony/databases
+    rm /data/data/com.android.providers.telephony/shared_prefs
 
     restorecon -R /efs
 
@@ -192,6 +196,8 @@ on property:sys.boot_completed=1
     # Symlink directories to access telephony.db and preferred-apn.xml required by cbd
     symlink /data/user_de/0/com.android.providers.telephony/databases /data/data/com.android.providers.telephony/databases
     symlink /data/user_de/0/com.android.providers.telephony/shared_prefs /data/data/com.android.providers.telephony/shared_prefs
+    restorecon /data/data/com.android.providers.telephony/databases
+    restorecon /data/data/com.android.providers.telephony/shared_prefs
 
 on boot
     # Set up kernel tracing, but disable it by default
@@ -352,7 +358,7 @@ on fs
     chown system system /sys/class/mdnie/mdnie/auto_brightness
 
 # make sure data_system dir and perms are properly set.
-    mkdir /data/system 0771 system system
+    mkdir /data/system 0775 system system
     chown system system /data/system
     mkdir /data/system/gps 0771 system system
     chown system system /data/system/gps
