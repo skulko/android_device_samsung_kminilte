@@ -3,9 +3,6 @@ on post-fs-data
     mkdir /data/vendor/wifi 0771 wifi wifi
     mkdir /data/vendor/wifi/wpa 0771 wifi wifi
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
-    mkdir /data/misc/dhcp 0770 system wifi
-    chown system wifi /data/misc/dhcp
-    chown system wifi /data/misc/wifi
 
     # for WIFI TRP/TIS
     chown system root /data/.psm.info
@@ -50,7 +47,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     class main
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
-#    group system wakelock
+    group system wakelock wifi inet
     oneshot
 
 service macloader /vendor/bin/macloader
