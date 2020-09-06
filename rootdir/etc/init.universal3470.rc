@@ -260,13 +260,6 @@ on boot
 # CS socket
     mkdir /dev/socket/cs_socket 0770 system system
 
-    # Support silent logging
-    mkdir /data/misc/dhcp 0775 dhcp dhcp
-    chown dhcp dhcp /data/misc/dhcp
-    chmod 0777 /system/bin/diagexe
-    chmod 0755 /system/bin/ddexe
-    chmod 0755 /system/bin/smdexe
-
     # Permission for IPC
     chown radio radio /dev/umts_ipc0
 
@@ -601,23 +594,6 @@ service cs_service /system/bin/cs
 on property:sys.mobicoredaemon.enable=true
     start cs_service
     write /proc/iccc_ready 1
-
-# Silent logging daemon (638)
-service DIAG-daemon /system/bin/diagexe
-    class main
-    user root
-    group system radio inet net_raw
-
-service DR-daemon /system/bin/ddexe
-    class main
-    user root
-    group system radio inet net_raw
-
-service SMD-daemon /system/bin/smdexe
-    class main
-    user root
-    group system radio inet net_raw
-    oneshot
 
 # TVout
 service TvoutService_C /system/bin/bintvoutservice
