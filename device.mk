@@ -160,6 +160,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	SimpleCamera
 
+# RAM-friendly launcher
+PRODUCT_PACKAGES += \
+    LastLauncher
+
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.isUsbOtgEnabled=true
 
