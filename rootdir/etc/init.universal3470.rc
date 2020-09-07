@@ -144,6 +144,11 @@ on post-fs-data
     chown system radio /sys/class/camera/front/front_camfw
     chown system radio /sys/class/camera/front/front_camtype
 
+    # Create directories for audio
+    mkdir /data/snd 0771 audioserver audio
+    chown audioserver audio /data/snd
+    mkdir /data/misc/audio 0770 audio audio
+
     # mobicore
     mkdir /data/app/mcRegistry 0775 system system
     mkdir /data/app/mcRegistry/TbStorage 0700 system system
@@ -151,17 +156,8 @@ on post-fs-data
 
     # Remove symlinks to avoid issues with migrate after nandroid restores
     # Will be recreated at end of boot
-    # Normal path
     rm /data/data/com.android.providers.telephony/databases
     rm /data/data/com.android.providers.telephony/shared_prefs
-
-    # COMPAT: Handle upgrade from previous implementation of this idea. If the
-    # above could not be unlinked then we have the old symlinked files
-    # scenario. Clean that up.
-    rm /data/data/com.android.providers.telephony/databases/telephony.db
-    rm /data/data/com.android.providers.telephony/shared_prefs/preferred-apn.xml
-    rmdir /data/data/com.android.providers.telephony/databases
-    rmdir /data/data/com.android.providers.telephony/shared_prefs
 
     restorecon -R /efs
 
@@ -200,6 +196,8 @@ on property:sys.boot_completed=1
     # Symlink directories to access telephony.db and preferred-apn.xml required by cbd
     symlink /data/user_de/0/com.android.providers.telephony/databases /data/data/com.android.providers.telephony/databases
     symlink /data/user_de/0/com.android.providers.telephony/shared_prefs /data/data/com.android.providers.telephony/shared_prefs
+    restorecon /data/data/com.android.providers.telephony/databases
+    restorecon /data/data/com.android.providers.telephony/shared_prefs
 
 on boot
     # Set up kernel tracing, but disable it by default
@@ -228,7 +226,7 @@ on boot
     chmod 0660 /dev/s5p-smem
     chown system system /dev/mobicore
     chown radio system /dev/mobicore-user
-    chown media system /dev/s5p-smem
+    chown system mediadrm /dev/s5p-smem
     chmod 0660 /dev/t-base-tui
     chown system system /dev/t-base-tui
     export MC_AUTH_TOKEN_PATH /efs
@@ -261,13 +259,6 @@ on boot
 
 # CS socket
     mkdir /dev/socket/cs_socket 0770 system system
-
-    # Support silent logging
-    mkdir /data/misc/dhcp 0775 dhcp dhcp
-    chown dhcp dhcp /data/misc/dhcp
-    chmod 0777 /system/bin/diagexe
-    chmod 0755 /system/bin/ddexe
-    chmod 0755 /system/bin/smdexe
 
     # Permission for IPC
     chown radio radio /dev/umts_ipc0
@@ -360,7 +351,7 @@ on fs
     chown system system /sys/class/mdnie/mdnie/auto_brightness
 
 # make sure data_system dir and perms are properly set.
-    mkdir /data/system 0771 system system
+    mkdir /data/system 0775 system system
     chown system system /data/system
     mkdir /data/system/gps 0771 system system
     chown system system /data/system/gps
@@ -603,23 +594,6 @@ service cs_service /system/bin/cs
 on property:sys.mobicoredaemon.enable=true
     start cs_service
     write /proc/iccc_ready 1
-
-# Silent logging daemon (638)
-service DIAG-daemon /system/bin/diagexe
-    class main
-    user root
-    group system radio inet net_raw
-
-service DR-daemon /system/bin/ddexe
-    class main
-    user root
-    group system radio inet net_raw
-
-service SMD-daemon /system/bin/smdexe
-    class main
-    user root
-    group system radio inet net_raw
-    oneshot
 
 # TVout
 service TvoutService_C /system/bin/bintvoutservice
