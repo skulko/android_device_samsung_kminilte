@@ -50,7 +50,6 @@ PRODUCT_PACKAGES += \
    FakeStore \
    GmsCore \
    GsfProxy \
-   GsmLocation \
    NominatimNlpBackend \
    OpenLauncher \
    SimpleKeyboard
