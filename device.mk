@@ -51,7 +51,6 @@ PRODUCT_PACKAGES += \
    GmsCore \
    GsfProxy \
    NominatimNlpBackend \
-   OpenLauncher \
    SimpleKeyboard
 
 # Swypelib
