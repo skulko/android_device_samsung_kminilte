@@ -34,7 +34,10 @@
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
 #include <sys/_system_properties.h>
 
+#include <android-base/file.h>
+#include <android-base/logging.h>
 #include <android-base/properties.h>
+#include <android-base/strings.h>
 
 #include "property_service.h"
 #include "vendor_init.h"
@@ -42,51 +45,84 @@
 #define LOG_TAG "init_properties"
 #include <cutils/log.h>
 
-void property_override(char const prop[], char const value[])
-{
-    prop_info *pi;
+#define SERIAL_NUMBER_FILE "/efs/FactoryApp/serial_no"
 
-    pi = (prop_info*) __system_property_find(prop);
-    if (pi)
+using android::base::GetProperty;
+using android::base::ReadFileToString;
+using android::base::Trim;
+using android::init::property_set;
+
+
+// copied from build/tools/releasetools/ota_from_target_files.py
+// but with "." at the end and empty entry
+std::vector<std::string> ro_product_props_default_source_order = {
+    "",
+    "product.",
+    "product_services.",
+    "odm.",
+    "vendor.",
+    "system.",
+};
+
+void property_override(char const prop[], char const value[], bool add = true)
+{
+    auto pi = (prop_info *) __system_property_find(prop);
+
+    if (pi != nullptr) {
         __system_property_update(pi, value, strlen(value));
-    else
+    } else if (add) {
         __system_property_add(prop, strlen(prop), value, strlen(value));
-}
-
-void property_override_dual(char const system_prop[],
-		char const vendor_prop[], char const value[])
-{
-	property_override(system_prop, value);
-	property_override(vendor_prop, value);
+    }
 }
 
 void vendor_load_properties()
 {
-    std::string platform = android::base::GetProperty("ro.board.platform", "");
     std::string bootloader = android::base::GetProperty("ro.bootloader", "");
 
-    if (platform != ANDROID_TARGET) {
-        return;
+    char const *serial_number_file = SERIAL_NUMBER_FILE;
+    std::string serial_number;
+
+    if (ReadFileToString(serial_number_file, &serial_number)) {
+        serial_number = Trim(serial_number);
+        property_override("ro.serialno", serial_number.c_str());
     }
+
+    const auto set_ro_product_prop = [](const std::string &source,
+            const std::string &prop, const std::string &value) {
+        auto prop_name = "ro.product." + source + prop;
+        property_override(prop_name.c_str(), value.c_str(), false);
+    };
 
     if (bootloader.find("G800F") != std::string::npos) {
         /* kminiltexx */
-        property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "samsung/kminiltexx/kminilte:6.0.1/MMB29K/G800FXXU1CRG3:user/release-keys");
+        for (const auto &source : ro_product_props_default_source_order) {
+            set_ro_product_prop(source, "fingerprint", "samsung/kminiltexx/kminilte:6.0.1/MMB29K/G800FXXU1CRG3:user/release-keys");
+            set_ro_product_prop(source, "device", "kminiltexx");
+            set_ro_product_prop(source, "model", "SM-G800F");
+            set_ro_product_prop(source, "name", "kminiltexx");
+        }
         property_override("ro.build.description", "kminiltexx-user 6.0.1 MMB29K G800FXXU1CRG3 release-keys");
-        property_override_dual("ro.product.model", "ro.vendor.product.model", "SM-G800F");
-        property_override_dual("ro.product.device", "ro.vendor.product.device", "kminiltexx");
+        property_override("ro.build.product", "kminiltexx");
     } else if (bootloader.find("G800Y") != std::string::npos) {
         /* kminiltedv */
-        property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "samsung/kminiltedv/kminilte:5.1.1/LMY49J/G800YUIS1BPL1:user/release-keys");
+        for (const auto &source : ro_product_props_default_source_order) {
+            set_ro_product_prop(source, "fingerprint", "samsung/kminiltedv/kminilte:5.1.1/LMY49J/G800YUIS1BPL1:user/release-keys");
+            set_ro_product_prop(source, "device", "kminiltedv");
+            set_ro_product_prop(source, "model", "SM-G800Y");
+            set_ro_product_prop(source, "name", "kminiltedv");
+        }
         property_override("ro.build.description", "kminiltedv-user 5.1.1 LMY49J G800YUIS1BPL1 release-keys");
-        property_override_dual("ro.product.model", "ro.vendor.product.model", "SM-G800Y");
-        property_override_dual("ro.product.device", "ro.vendor.product.device", "kminiltedv");
+        property_override("ro.build.product", "kminiltedv");
     } else if (bootloader.find("G800M") != std::string::npos) {
         /* kminilteub */
-        property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "samsung/kminilteub/kminilte:6.0.1/MMB29K/G800MUBU1CPL1:user/release-keys");
+        for (const auto &source : ro_product_props_default_source_order) {
+            set_ro_product_prop(source, "fingerprint", "samsung/kminilteub/kminilte:6.0.1/MMB29K/G800MUBU1CPL1:user/release-keys");
+            set_ro_product_prop(source, "device", "kminilteub");
+            set_ro_product_prop(source, "model", "SM-G800M");
+            set_ro_product_prop(source, "name", "kminilteub");
+        }
         property_override("ro.build.description", "kminilteub-user 6.0.1 MMB29K G800MUBU1CPL1 release-keys");
-        property_override_dual("ro.product.model", "ro.vendor.product.model", "SM-G800M");
-        property_override_dual("ro.product.device", "ro.vendor.product.device", "kminilteub");
+        property_override("ro.build.product", "kminilteub");
     }
 
     std::string device = android::base::GetProperty("ro.product.device", "");

@@ -74,7 +74,7 @@ LOCAL_SHARED_LIBRARIES += libdl
 LOCAL_SHARED_LIBRARIES += libmllite
 
 # Additions for SysPed
-LOCAL_SHARED_LIBRARIES += libmplmpu
+#LOCAL_SHARED_LIBRARIES += libmplmpu
 LOCAL_C_INCLUDES += $(INVENSENSE_IIO_PATH)/software/core/mpl
 LOCAL_CPPFLAGS += -DLINUX=1
 

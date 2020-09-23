@@ -16,6 +16,8 @@ telephony.lteOnCdmaDevice=0
 persist.radio.apm_sim_not_pwdn=1
 persist.radio.add_power_save=1
 
+ro.telephony.use_old_mnc_mcc_format=true
+
 # audio
 ro.config.vc_call_vol_steps=7
 ro.config.media_vol_steps=25
@@ -75,8 +77,5 @@ debug.sf.disable_hwcomposer=true
 debug.hwui.use_buffer_age=false
 debug.sf.enable_gl_backpressure=1
 debug.sf.latch_unsignaled=1
-
-# Use legacy codecs (still needed for P?)
 debug.stagefright.ccodec=0
-media.stagefright.legacyencoder=true
-media.stagefright.less-secure=true
+

@@ -22,6 +22,8 @@ DEVICE_PATH := device/samsung/kminilte
 # Assert
 TARGET_OTA_ASSERT_DEVICE := kminiltexx,kminiltedv,kminilteub,kminilte
 
+BUILD_FINGERPRINT := samsung/kminiltexx/kminilte:6.0.1/MMB29K/G800FXXU1CRG3:user/release-keys
+
 # Filesystems
 # Note: the BOARD_...IMAGE_PARTITION_SIZE values define the image sizes, 
 # not the partition sizes. So the image sizes can also be lower than the partition size. 
@@ -36,6 +38,7 @@ TARGET_OTA_ASSERT_DEVICE := kminiltexx,kminiltedv,kminilteub,kminilte
 # Image sizes
 BOARD_BOOTIMAGE_PARTITION_SIZE := 10485760
 BOARD_CACHEIMAGE_PARTITION_SIZE := 314572800
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 12582912
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2147483648
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 12833521664
@@ -74,11 +77,12 @@ TARGET_PROVIDES_LIBSENSORS := true
 BOARD_EGL_NEEDS_HANDLE_VALUE := true
 
 # Vendor Init
-TARGET_INIT_VENDOR_LIB := libinit_kminilte
+TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_kminilte
 TARGET_LIBINIT_DEFINES_FILE := $(DEVICE_PATH)/init/init_kminilte.cpp
 
 # Recovery
-TARGET_RECOVERY_DEVICE_DIRS += $(DEVICE_PATH)
+TARGET_RECOVERY_DEVICE_MODULES := libinit_kminilte
+#TARGET_RECOVERY_DEVICE_DIRS += $(DEVICE_PATH)
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.universal3470
 BOARD_HAS_LARGE_FILESYSTEM := true
 
@@ -93,7 +97,7 @@ ifeq ($(HOST_OS),linux)
 endif
 
 # Shipping API level (for CTS backward compatibility)
-PRODUCT_SHIPPING_API_LEVEL := 19
+#PRODUCT_SHIPPING_API_LEVEL := 19
 
 # TWRP (not compatible with user build variant)
 #RECOVERY_VARIANT := twrp
@@ -112,3 +116,4 @@ TW_NO_LEGACY_PROPS := true
 # SELinux
 BOARD_SEPOLICY_DIRS := \
 	$(DEVICE_PATH)/sepolicy
+SELINUX_IGNORE_NEVERALLOWS := true

@@ -2,7 +2,6 @@ import init.universal3470.usb.rc
 import init.wifi.rc
 
 on early-init
-    mkdir /efs 0771 radio system
 
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
@@ -73,25 +72,33 @@ on post-fs-data
     setprop vold.post_fs_data_done 1
 
     # Added for TZ Playready DRM Support
-	mkdir /efs/drm 0774 drm system
-	mkdir /efs/drm/playready 0775 drm system
+    mkdir /efs/drm 0774 drm system
+    mkdir /efs/drm/playready 0775 drm system
+    mkdir /efs/drm/sdrm 0774 drm system
+    mkdir /efs/drm/sdrm/data_agent 0774 drm system
+    restorecon /efs/drm
+    restorecon /efs/drm/sdrm
+    restorecon /efs/drm/sdrm/data_agent
 
-# Multimedia property for Smart View
-	setprop media.enable-commonsource true
+    # Multimedia property for Smart View
+    setprop media.enable-commonsource true
 
-   # NFC_NXP
+    # NFC_NXP
     setprop ro.nfc.port "I2C"
     mkdir /data/nfc 0700 nfc nfc
     mkdir /data/nfc/param 0700 nfc nfc
     chmod 0660 /dev/pn547
     chown nfc nfc /dev/pn547
     chown nfc /dev/pn547
-    chgrp nfc /dev/pn547
 
      # NFC_SLSI
     chmod 0660 /dev/sec-nfc
     chown nfc nfc /dev/sec-nfc
 
+    # Bluetooth
+    mkdir /efs/bluetooth 0775 bluetooth bluetooth
+    chown bluetooth bluetooth /efs/bluetooth/bt_addr
+    chmod 0664 /efs/bluetooth/bt_addr
 
     # MST/NFC Switch
     chown spay system /dev/mst_ctrl
@@ -108,7 +115,6 @@ on post-fs-data
     chown system system /efs/drm/h2k
 
     # icd
-    check_icd
     chown system system /dev/icd
     chmod 0644 /dev/icd
     chown system system /dev/icdr
@@ -206,9 +212,9 @@ on boot
 
     # Permissions for bluetooth
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
-    chown bluetooth bluetooth ro.bt.bdaddr_path
-    chown radio bluetooth /efs/bluetooth/bt_addr
-    chmod 0640 /efs/bluetooth/bt_addr
+    #chown bluetooth bluetooth ro.bt.bdaddr_path
+    #chown radio bluetooth /efs/bluetooth/bt_addr
+    #chmod 0640 /efs/bluetooth/bt_addr
     chown bluetooth bluetooth /dev/ttySAC0
     chmod 0660 /dev/ttySAC0
     chmod 0660 /sys/class/rfkill/rfkill0/state
@@ -236,6 +242,9 @@ on boot
 
 # SSWAP
     write /proc/sys/vm/swappiness 120
+
+# Prevent out of order ack from conn tracking
+    write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
 
 # OTG_TEST
     chown system radio /sys/class/host_notify/usb_otg/booster
@@ -305,7 +314,7 @@ on boot
     chmod 0664 /sys/power/enable_dm_hotplug
 
 on fs
-    mount_all /fstab.universal3470
+    mount_all /fstab.universal3470 --early
     setprop ro.crypto.fuse_sdcard true
 
 #For Absolute Persistence Partition
@@ -313,13 +322,14 @@ on fs
     mkdir /persdata/absolute 0750 system system
 
     wait /dev/block/platform/dw_mmc.0/by-name/PERSDATA
-    check_fs /dev/block/platform/dw_mmc.0/by-name/PERSDATA ext4
     mount ext4 /dev/block/platform/dw_mmc.0/by-name/PERSDATA /persdata/absolute nosuid nodev barrier=1
 
     chown system system /persdata
     chmod 0755 /persdata
     chown system system /persdata/absolute
     chmod 0750 /persdata/absolute
+
+    mount_all /fstab.universal3470 --late
 
 # Support Preload install apks
     mkdir /preload 0771 system system
@@ -510,12 +520,6 @@ on fs
 # OTG power mode
     chmod 0660 /sys/class/sec/switch/otg_cable_type
     chown system radio /sys/class/sec/switch/otg_cable_type
-
-# SENSOR FRAMEWORK : starts fingerprintService
-service vcsFPService /system/bin/vcsFPService
-    class main
-    user system
-    group system
 
 service prepare_param /system/bin/prepare_param.sh /dev/block/platform/dw_mmc.0/by-name/PARAM
     class core
