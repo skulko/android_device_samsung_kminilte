@@ -212,11 +212,13 @@
 # FM Radio
 /dev/radio0               0660   system     audio
 
+# Wifi
+/dev/rfkill               0660   system     wifi
+
 # Bluetooth
-/dev/ttySAC0              0600   bluetooth    bluetooth
-/dev/unifiudi0            0666   wifi         wifi
-/dev/uhid                 0660   system     net_bt_stack
-/dev/uinput               0660   system     net_bt_stack
+/dev/ttySAC0              0600   bluetooth  bluetooth
+/dev/uhid                 0660   system     bluetooth
+/dev/uinput               0660   system     bluetooth
 
 # MobiCore
 /dev/mobicore             0700   system     system
