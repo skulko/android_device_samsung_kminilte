@@ -1,0 +1,5 @@
+allow init hal_camera_hwservice:hwservice_manager {find};
+allow init hal_graphics_mapper_hwservice:hwservice_manager {find};
+allow init hidl_allocator_hwservice:hwservice_manager {find};
+allow init hidl_base_hwservice:hwservice_manager {add};
+allow init hidl_memory_hwservice:hwservice_manager {find};
