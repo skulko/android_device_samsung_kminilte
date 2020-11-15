@@ -65,7 +65,6 @@ on post-fs-data
 
 
 on post-fs-data
-    setprop vold.post_fs_data_done 1
 
     mkdir /efs/drm 0774 drm system
     mkdir /efs/drm/playready 0775 drm system
@@ -158,6 +157,8 @@ on post-fs-data
     rm /data/data/com.android.providers.telephony/shared_prefs
 
     restorecon -R /efs
+
+    setprop vold.post_fs_data_done 1
 
     # Mark wifi driver as unloaded - "ok" indicates loaded
     setprop wlan.driver.status not_ok
