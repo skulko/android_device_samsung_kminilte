@@ -235,7 +235,7 @@ on boot
 
 # SSWAP / VM
     write /proc/sys/vm/swappiness 60
-    write /proc/sys/vm/vfs_cache_pressure 130
+    write /proc/sys/vm/vfs_cache_pressure 100
     write /proc/sys/vm/min_free_kbytes 67584
 
 # Prevent out of order ack from conn tracking
